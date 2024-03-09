@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class EnemyMover : MonoBehaviour
+{
+    public Transform[] _waypoints;
+    public float _speed = 2f;
+
+    private int _currentWaypointIndex = 0;
+
+    private void Update()
+    {  
+        transform.position = Vector2.MoveTowards(transform.position, _waypoints[_currentWaypointIndex].position, _speed * Time.deltaTime);
+        
+        Vector2 direction = _waypoints[_currentWaypointIndex].position - transform.position;
+        
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        if (transform.position == _waypoints[_currentWaypointIndex].position)
+        {
+            _currentWaypointIndex = (++_currentWaypointIndex) % _waypoints.Length;
+        }
+    }
+}
