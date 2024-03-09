@@ -1,0 +1,36 @@
+using System.Collections;
+using UnityEngine;
+
+public class CoinSpavner : MonoBehaviour
+{
+    [SerializeField] private Coin _enemyPrefab;
+    [SerializeField] private Transform _pathPoints;
+    [SerializeField] private float _spawnInterval = 2.0f;
+
+    private Transform[] _spawnPoints;
+
+    private void Start()
+    {
+        _spawnPoints = new Transform[_pathPoints.childCount];
+
+        for (int i = 0; i < _spawnPoints.Length; i++)
+            _spawnPoints[i] = _pathPoints.GetChild(i);
+
+        StartCoroutine(SpawnEnemies());
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        WaitForSeconds wait = new WaitForSeconds(_spawnInterval);
+
+        while (true)
+        {
+            int randomIndex = Random.Range(0, _spawnPoints.Length);
+            Transform spawnPoint = _spawnPoints[randomIndex];
+
+            Coin newCoin = Instantiate(_enemyPrefab, spawnPoint.position, spawnPoint.rotation);;
+
+            yield return wait;
+        }
+    }
+}
