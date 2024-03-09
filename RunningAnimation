@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class RunningAnimation : MonoBehaviour
+{
+    private Animator _animator;
+    private Rigidbody2D _rigidbody;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        bool isMoving = Mathf.Abs(_rigidbody.velocity.x) > 0.1f;
+
+        _animator.SetBool("isRunning", isMoving);
+    }
+}
