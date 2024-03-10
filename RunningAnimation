@@ -1,7 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
+
 public class RunningAnimation : MonoBehaviour
 {
+    private const string _isRunning = "isRunning";
     private Animator _animator;
     private Rigidbody2D _rigidbody;
 
@@ -15,6 +18,6 @@ public class RunningAnimation : MonoBehaviour
     {
         bool isMoving = Mathf.Abs(_rigidbody.velocity.x) > 0.1f;
 
-        _animator.SetBool("isRunning", isMoving);
+        _animator.SetBool(_isRunning, isMoving);
     }
 }
