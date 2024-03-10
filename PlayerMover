@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+
+public class PlayerMover : MonoBehaviour
 {
+    private const string _horizontal = "Horizontal";
+
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _jumpForce = 5.0f;
-
+    
     private Rigidbody2D _rigidbody;
-
+    
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -14,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        float moveInput = Input.GetAxisRaw(_horizontal);
         _rigidbody.velocity = new Vector2(moveInput * _speed, _rigidbody.velocity.y);
 
         if (moveInput > 0)
@@ -32,3 +36,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
