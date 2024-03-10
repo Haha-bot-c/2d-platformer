@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class CoinSpavner : MonoBehaviour
+public class HealthAndCoinSpawner : MonoBehaviour
 {
-    [SerializeField] private Coin _enemyPrefab;
+    [SerializeField] private Item _itemPrefab;
     [SerializeField] private Transform _pathPoints;
     [SerializeField] private float _spawnInterval = 2.0f;
 
@@ -28,7 +28,7 @@ public class CoinSpavner : MonoBehaviour
             int randomIndex = Random.Range(0, _spawnPoints.Length);
             Transform spawnPoint = _spawnPoints[randomIndex];
 
-            Coin newCoin = Instantiate(_enemyPrefab, spawnPoint.position, spawnPoint.rotation);;
+            Item newItem = Instantiate(_itemPrefab, spawnPoint.position, spawnPoint.rotation);
 
             yield return wait;
         }
