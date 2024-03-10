@@ -4,7 +4,7 @@ public class Coin : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other?.GetComponent<PlayerController>())
+        if (other.TryGetComponent<PlayerMover>(out PlayerMover playerController))
         {
                 Destroy(gameObject);
         }  
